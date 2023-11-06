@@ -4,7 +4,27 @@
 -- Developed for Silent - Illidan EU
 --
 
-local taggedmobs = {}
+-- Optimize frequent calls
+local GetChannelName = GetChannelName
+local GetNumPartyMembers = GetNumPartyMembers
+local GetRaidTargetIndex = GetRaidTargetIndex
+local GetSpellInfo = GetSpellInfo
+local GetTime = GetTime
+local IsShiftKeyDown = IsShiftKeyDown
+local SendChatMessage = SendChatMessage
+local UnitAffectingCombat = UnitAffectingCombat
+local UnitDebuff = UnitDebuff
+local UnitExists = UnitExists
+local UnitInParty = UnitInParty
+local UnitInRaid = UnitInRaid
+local UnitIsGroupAssistant = UnitIsGroupAssistant
+local UnitIsGroupLeader = UnitIsGroupLeader
+local UnitIsUnit = UnitIsUnit
+local UnitName = UnitName
+local UnitGUID = UnitGUID
+local UnitHealth = UnitHealth
+local UnitHealthMax = UnitHealthMax
+
 local db
 
 function Silk_LoadDB()
@@ -624,7 +644,7 @@ local hpproto = {}
 
 function hpproto:CreateMainFrame()
     local inset = healthInset
-    mainframe = CreateFrame("Frame",nil,self,"BackdropTemplate")
+    local mainframe = CreateFrame("Frame",nil,self,"BackdropTemplate")
     mainframe:SetPoint("BOTTOMLEFT",self,"BOTTOMLEFT",healthHeight*(1+nbstunicons)+inset,0)
     mainframe:SetPoint("TOPRIGHT",self,"TOPRIGHT",-inset,0)
     mainframe:SetBackdrop({
@@ -760,7 +780,7 @@ function hpproto:SetStun(spell, expiration, caster)
         caster = caster
     }
     local inset = 1
-    local index = min(self.stunicon.last+1,nbstunicons)
+    local index = math.min(self.stunicon.last+1,nbstunicons)
     local spellname,_,icon = GetSpellInfo(spell)
     self.stunicon[index].icon = icon
     self.stunicon[index]:SetTexture(icon)
@@ -779,7 +799,7 @@ function hpproto:SetStun(spell, expiration, caster)
     if castername then
         source = source .. " ("..castername..")"
     end
-    local duration = GetHumanReadableTime(max(expiration-GetTime(),0), true)
+    local duration = GetHumanReadableTime(math.max(expiration-GetTime(),0), true)
 
     AddTooltipText(self.stunicon[index].frame,castername,spellname.." ("..duration..")")
     
@@ -802,7 +822,7 @@ function hpproto:SetRaidIcon(raidicon)
     if raidicon == 0 then
         self.raidicon:SetTexCoord(0,0,0,0)
     else
-        local line = floor((raidicon-1)/4)
+        local line = math.floor((raidicon-1)/4)
         local col = raidicon-1 - line*4
         local left,right,top,bottom = 0.25*col, 0.25*(1+col), 0.25*line, 0.25*(1+line)
         self.raidicon:SetTexCoord(left,right,top,bottom)
@@ -857,7 +877,7 @@ function hpproto:UpdateUnit(unit)
                 if not self.stun or (self.stun.spell ~= spellId) or (self.stun.expiration ~= expirationTime) or (self.stun.caster ~= unitCaster) then
                     -- stun found, more precisely a new stun
                     self:SetStun(spellId, expirationTime, unitCaster)
-                    local duration = max(expirationTime-GetTime(),0)
+                    local duration = math.max(expirationTime-GetTime(),0)
                     record:SetStun(guid, spellId, duration, UnitName(unitCaster))
                 end
                 return
@@ -875,10 +895,10 @@ function hpproto:UpdateStunDuration()
         local currentTime = GetTime()
         if currentTime > self.stunlabel.expiration then
             local alpha = 1 - 0.5*(currentTime - self.stunlabel.expiration)
-            alpha = max(min(alpha,1),0)
+            alpha = math.max(math.min(alpha,1),0)
             self.stunlabel:SetAlpha(alpha)
             if self.stunicon and (self.stunicon.last > 0) then
-                self.stunicon[self.stunicon.last]:SetAlpha(max(alpha,0.5))
+                self.stunicon[self.stunicon.last]:SetAlpha(math.max(alpha,0.5))
             end
         end
     end
@@ -893,7 +913,7 @@ function hpproto:UpdateSize()
         if self.total > 0 then
             local minhealth = self.minhealth or 0
             local maxhealth = self.maxhealth or 1
-            local width = self.healthbar:GetWidth()*(1/(maxhealth-minhealth))*(min(max(self.health/self.total,minhealth),maxhealth)-minhealth) -- minhealth% - maxhealth%
+            local width = self.healthbar:GetWidth()*(1/(maxhealth-minhealth))*(math.min(math.max(self.health/self.total,minhealth),maxhealth)-minhealth) -- minhealth% - maxhealth%
             self.healthbar.gradient:SetPoint("RIGHT",self.healthbar,"LEFT",width,0)
         else
             self.healthbar.gradient:SetPoint("RIGHT",self.healthbar,"LEFT",0,0)
@@ -1247,7 +1267,7 @@ end
 
 function tlproto:CreateUnitIcon()
     local inset = healthInset
-    uniticon = self:CreateTexture(nil,"OVERLAY")
+    local uniticon = self:CreateTexture(nil,"OVERLAY")
     uniticon:SetPoint("BOTTOMLEFT",self,"BOTTOMLEFT",inset,inset)
     uniticon:SetPoint("TOPRIGHT",self,"TOPLEFT",-inset+self:GetHeight(),-inset)
     uniticon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcons")
@@ -1307,7 +1327,7 @@ function tlproto:SetStun(index, spell, starts, duration, caster, verystart, very
     stunframe.icon:SetAlpha(1)
 
     local title = caster
-    local text = spellname.." ("..GetHumanReadableTime(max(duration,0), true)..")"
+    local text = spellname.." ("..GetHumanReadableTime(math.max(duration,0), true)..")"
     AddTooltipText(stunframe,title,text)
 
     stunframe:Show()
@@ -1321,7 +1341,7 @@ function tlproto:SetRaidIcon(raidicon)
     if raidicon == 0 then
         self.uniticon:SetTexCoord(0,0,0,0)
     else
-        local line = floor((raidicon-1)/4)
+        local line = math.floor((raidicon-1)/4)
         local col = raidicon-1 - line*4
         local left,right,top,bottom = 0.25*col, 0.25*(1+col), 0.25*line, 0.25*(1+line)
         self.uniticon:SetTexCoord(left,right,top,bottom)
@@ -1348,12 +1368,12 @@ function Silk_GetAAAWindow()
 end
 
 function Silk_UpdateTimeLineControls()
-    window = Silk_GetAAAWindow()
+    local window = Silk_GetAAAWindow()
     if not window then return end
 
     window.tlc.valkyrlabel:SetFormattedText(SILK_VALKYR_X_ON_Y, window.currentcolumn, #window.column)
 
-    local mincolumn = min(1,#window.column)
+    local mincolumn = math.min(1,#window.column)
     if window.currentcolumn <= mincolumn then
         window.tlc.lbutton:Disable()
     else
@@ -1369,7 +1389,7 @@ function Silk_UpdateTimeLineControls()
 end
 
 function Silk_ShowTimeLineColumn()
-    window = Silk_GetAAAWindow()
+    local window = Silk_GetAAAWindow()
     if not window then return end
 
     if not window.currentcolumn or not window.column then return end
@@ -1384,7 +1404,7 @@ function Silk_ShowTimeLineColumn()
             local unit = window.record.unit[guid]
             tl:SetRaidIcon(unit.raidicon)
             local starts = unit.created
-            local ends = max(unit.forgotten, unit.killed)
+            local ends = math.max(unit.forgotten, unit.killed)
             if ends < 0 then ends = interval.ends end
             tl:SetUnitTimes(starts, ends, interval.starts, interval.ends)
             for j=1,nbstunicons do
@@ -1403,7 +1423,7 @@ function Silk_ShowTimeLineColumn()
 end
 
 function Silk_SetTimeLines(record)
-    window = Silk_GetAAAWindow()
+    local window = Silk_GetAAAWindow()
     if not window then return end
 
     Silk_Debug("Setting record "..record.name)
@@ -1427,7 +1447,7 @@ function Silk_SetTimeLines(record)
         local beginning = created
         local ending = ends
         if (forgotten > 0) or (killed > 0) then
-            ending = max(forgotten, killed)
+            ending = math.max(forgotten, killed)
         end
         units[#units+1] = {
             guid = guid,
@@ -1457,8 +1477,8 @@ function Silk_SetTimeLines(record)
         else
             -- interval comatible, merging interval with unit
             local interval = intervals[compatibleindex]
-            interval.starts = min(interval.starts, unit.starts)
-            interval.ends = max(interval.ends, unit.ends)
+            interval.starts = math.min(interval.starts, unit.starts)
+            interval.ends = math.max(interval.ends, unit.ends)
             interval.units[#interval.units+1] = unit.guid
         end
     end
@@ -1470,7 +1490,7 @@ function Silk_SetTimeLines(record)
 
     window.column = intervals
 
-    local mincolumn = min(1,#window.column)
+    local mincolumn = math.min(1,#window.column)
     local maxcolumn = #window.column
     if (window.currentcolumn < mincolumn) then
         window.currentcolumn = mincolumn
@@ -1483,7 +1503,7 @@ function Silk_SetTimeLines(record)
 end
 
 function Silk_UpdateTimeLines()
-    window = Silk_GetAAAWindow()
+    local window = Silk_GetAAAWindow()
     if not window then return end
 
     if not window.record then return end
@@ -1491,7 +1511,7 @@ function Silk_UpdateTimeLines()
 end
 
 function Silk_PrevUnit()
-    window = Silk_GetAAAWindow()
+    local window = Silk_GetAAAWindow()
     if not window then return end
 
     if not window.currentcolumn or not window.column then return end
@@ -1504,7 +1524,7 @@ function Silk_PrevUnit()
 end
 
 function Silk_NextUnit()
-    window = Silk_GetAAAWindow()
+    local window = Silk_GetAAAWindow()
     if not window then return end
 
     if not window.currentcolumn or not window.column then return end
@@ -1623,7 +1643,7 @@ local halionproto = {}
 function halionproto:CreateIcon()
     local inset = halionInset
     local reduction = 6
-    icon = self:CreateTexture(nil,"OVERLAY")
+    local icon = self:CreateTexture(nil,"OVERLAY")
     icon:SetPoint("BOTTOMLEFT",self,"BOTTOMLEFT",inset+reduction,reduction)
     icon:SetPoint("TOPRIGHT",self,"TOPLEFT",inset+halionHeight-reduction,-reduction)
     self.icon = icon
@@ -2020,7 +2040,7 @@ end
 function Silk_RestoreWindows()
     for n,v in pairs(db.visible) do
         if v.show then
-            window = windows[v.name]
+            local window = windows[v.name]
             if window == nil then
                 window = Silk_CreateWindow(v.name)
                 Silk_CreateWindowContents(window, v.name)
@@ -2044,7 +2064,7 @@ function Silk_TestWindow()
     local rawname = windowname.valkyr
 --    local rawname = windowname.spitecaller
 --    local rawname = windowname.sk
-    valkyrwindow = windows[rawname]
+    local valkyrwindow = windows[rawname]
     if valkyrwindow == nil then
         Silk_Warning(SILK_CANT_TEST)
         return
@@ -2113,7 +2133,7 @@ function Silk_Invoke(cmd)
   elseif string.lower(cmd) == "reset" then
     Silk_ResetRecords()
   elseif string.lower(cmd) == "resetwin" then
-    futils.ResetAll();
+    futils:ResetAll();
   elseif string.lower(cmd):match"^stun +[^ ]+" then
     local stuncmd = cmd:match("^stun *(.*)")
     if string.lower(stuncmd) == "showraid" then

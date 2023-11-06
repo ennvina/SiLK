@@ -1,0 +1,32 @@
+{
+    "Lua.diagnostics.globals": [
+        "DEFAULT_CHAT_FRAME",
+        "LIGHTYELLOW_FONT_COLOR_CODE",
+        "NORMAL_FONT_COLOR_CODE",
+        "RED_FONT_COLOR_CODE",
+        "CreateFrame",
+        "GameFontNormal",
+        "GameTooltip",
+        "GetLocale",
+        "GetTime",
+        "GetChannelName",
+        "GetNumPartyMembers",
+        "GetRaidTargetIndex",
+        "GetSpellInfo",
+        "IsShiftKeyDown",
+        "UIParent",
+        "UnitAffectingCombat",
+        "UnitDebuff",
+        "UnitExists",
+        "UnitGUID",
+        "UnitHealth",
+        "UnitHealthMax",
+        "UnitInParty",
+        "UnitInRaid",
+        "UnitIsGroupAssistant",
+        "UnitIsGroupLeader",
+        "UnitIsUnit",
+        "UnitName",
+        "SendChatMessage"
+    ]
+}
