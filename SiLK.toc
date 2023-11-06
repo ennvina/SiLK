@@ -1,5 +1,5 @@
 ## Interface: 30403
-## Title: |Tinterface/icons/achievement_boss_svalasorrowgrave:16:16:0:0:512:512:64:448:64:448|t SiLK |c0040abffSilent Lich King|r
+## Title: |Tinterface/icons/achievement_boss_svalasorrowgrave:16:16:0:0:512:512:64:448:64:448|t SiLK |c0040abffSilent Lich King|r |cffa2f3ff1.2|r
 ## Author: Vinny, a.k.a. Ennvina
 ## Version: 1.2
 ## Notes: Track Val'kyr HP and stunlocks
