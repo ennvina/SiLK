@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+  <Script file="Silk.lua"/>
+  <Frame name="SilkFrame">
+    <Scripts>
+      <OnLoad> self:RegisterEvent("ADDON_LOADED"); self:RegisterEvent("CHAT_MSG_ADDON"); </OnLoad>
+      <OnEvent> Silk_OnEvent(self, event, ...); </OnEvent>
+      <OnUpdate> Silk_OnUpdate(); </OnUpdate>
+  </Scripts>
+  </Frame>
+  <GameTooltip name="CorpoTooltip" inherits="GameTooltipTemplate">
+    <Scripts>
+      <Onload>
+        self:SetOwner(WorldFrame, "ANCHOR_NONE");
+      </Onload>
+    </Scripts>
+  </GameTooltip>
+</Ui>
