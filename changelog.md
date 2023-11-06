@@ -1,6 +1,6 @@
 ## SiLK Changelog
 
-#### v1.2 (2023-11-05)
+#### v1.2-beta (2023-11-05)
 
 - Resurrection of ancient code, written back in 2009
 - There is much work to be done to improve code quality
