@@ -14,10 +14,8 @@ if GetLocale() == "frFR" then
 
   SILK_COMMANDHELP1 = "\"" .. SILK_SLASHCMD1 .. " enable\" ou \"" .. SILK_SLASHCMD1 .. " disable\" pour activer/désactiver l'addon"
   SILK_COMMANDHELP2 = "\"" .. SILK_SLASHCMD1 .. " show\" pour afficher la fenêtre des Val'kyrs du roi-liche"
-  SILK_COMMANDHELP2B= "\"" .. SILK_SLASHCMD1 .. " sc\" pour la fenêtre des Mande-hargnes (Spitecallers) de Sinestra"
-  SILK_COMMANDHELP2C= "\"" .. SILK_SLASHCMD1 .. " ca\" pour la fenêtre des Corrupteurs adhérents de Cho'gall"
   SILK_COMMANDHELP3 = "\"" .. SILK_SLASHCMD1 .. " resetwin\" pour remettre à zéro les fenêtres des l'addon"
-  SILK_COMMANDHELP4 = "\"" .. SILK_SLASHCMD1 .. " aaa\" pour analyser le combat passé et \"" .. SILK_SLASHCMD1 .. " reset\" pour réinitialiser les combats passés"
+  SILK_COMMANDHELP4 = "\"" .. SILK_SLASHCMD1 .. " reset\" pour réinitialiser les combats passés"
   SILK_COMMANDHELP5 = "\"" .. SILK_SLASHCMD1 .. " stun showraid\" pour afficher/désafficher sur le canal raid lorsqu'une Val'kyr est stun"
   SILK_COMMANDHELP7 = "\"" .. SILK_SLASHCMD1 .. " timeout <durée>\" pour définir la durée (en secondes) à partir de laquelle l'addon suppose que la Val'kyr devient sans intérêt si personne ne l'a ciblée"
   SILK_COMMANDHELP8 = "\"" .. SILK_SLASHCMD1 .. " channel <canal>\" pour choisir un canal pour les annonces de stun (par défaut : default)"
@@ -47,10 +45,8 @@ else
 
   SILK_COMMANDHELP1 = "\"" .. SILK_SLASHCMD1 .. " enable\" or \"" .. SILK_SLASHCMD1 .. " disable\" to enable/disable the addon"
   SILK_COMMANDHELP2 = "\"" .. SILK_SLASHCMD1 .. " show\" to display the Val'kyr window for the Lich King encounter"
-  SILK_COMMANDHELP2B= "\"" .. SILK_SLASHCMD1 .. " sc\" for the Spitecaller window for the Sinestra encounter"
-  SILK_COMMANDHELP2C= "\"" .. SILK_SLASHCMD1 .. " ca\" for the Corrupting Adherents window for the Cho'gall encounter"
   SILK_COMMANDHELP3 = "\"" .. SILK_SLASHCMD1 .. " resetwin\" to reset the addon windows"
-  SILK_COMMANDHELP4 = "\"" .. SILK_SLASHCMD1 .. " aaa\" to analyze the last combat and \"" .. SILK_SLASHCMD1 .. " reset\" to reset last combats"
+  SILK_COMMANDHELP4 = "\"" .. SILK_SLASHCMD1 .. " reset\" to reset past encounters"
   SILK_COMMANDHELP5 = "\"" .. SILK_SLASHCMD1 .. " stun showraid\" to show/hide on the raid channel when a Val'kyr is under a stun effect"
   SILK_COMMANDHELP7 = "\"" .. SILK_SLASHCMD1 .. " timeout <duration>\" to set the duration (in seconds) from which a Val'kyr is supposed unimportant if no one targetted it"
   SILK_COMMANDHELP8 = "\"" .. SILK_SLASHCMD1 .. " channel <channel>\" to select a channel to announce stuns to (by default: default)"

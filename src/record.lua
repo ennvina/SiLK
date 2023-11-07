@@ -164,7 +164,9 @@ end
 
 local records = {}
 
-function records:CreateRecord()
+local Records = {}
+
+function Records:CreateRecord()
     local record = {
         unit = {},
         starts = -1,
@@ -183,7 +185,7 @@ function records:CreateRecord()
 end
 
 -- Get the current record of create a new one if needed
-function records:GetRecord()
+function Records:GetRecord()
     if #records == 0 then
         return self:CreateRecord()
     end
@@ -196,15 +198,69 @@ function records:GetRecord()
 end
 
 -- Get the last record if and only if one exists, this record may or may not be terminated yet
-function records:GetLastRecord()
+function Records:GetLastRecord()
     if #records == 0 then
         return nil
     end
     return records[#records]
 end
 
-function records:ResetAll()
+function Records:ResetAll()
     records = {}
 end
 
-Silk.Records = records
+-- Records but not Records?? Need a major rework here
+
+function Silk_CreateRecord()
+    if Records:GetLastRecord() and Records:GetLastRecord().recording then
+        Records:GetLastRecord():End()
+    end
+    Records:CreateRecord()
+end
+function Silk_ImportRecord(str)
+    Records:CreateRecord():FromString(str)
+end
+function Silk_SaveRecords()
+    if Records:GetLastRecord() and Records:GetLastRecord().recording then
+        Records:GetLastRecord():End()
+    end
+    Silk.db.records = records
+    Silk_Debug(#records.." record(s) saved.")
+end
+function Silk_LoadRecords()
+    if Silk.db.records then
+        local recordsproto = {}
+        for k,v in pairs(records) do
+            if type(v) == "function" then
+                recordsproto[k]=v
+            end
+        end
+        records = Silk.db.records
+        for k,v in pairs(recordsproto) do
+            records[k]=v
+        end
+        Silk_Debug(#records.." record(s) loaded.")
+    else
+        Silk_Warning("Can not load records: no record previously saved.")
+    end
+end
+function Silk_ResetRecords()
+    if Silk.db.records then
+        local recordsproto = {}
+        for k,v in pairs(records) do
+            if type(v) == "function" then
+                recordsproto[k]=v
+            end
+        end
+        records = {}
+        Silk.db.records = records
+        for k,v in pairs(recordsproto) do
+            records[k]=v
+        end
+        Silk_Debug("Resetting saved record(s).")
+    else
+        Silk_Warning("Can not reset records: no record previously saved.")
+    end
+end
+
+Silk.Records = Records

@@ -10,7 +10,7 @@
         "GetLocale",
         "GetTime",
         "GetChannelName",
-        "GetNumPartyMembers",
+        "GetNumSubgroupMembers",
         "GetRaidTargetIndex",
         "GetSpellInfo",
         "IsShiftKeyDown",
