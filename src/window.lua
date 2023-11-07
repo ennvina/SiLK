@@ -21,23 +21,18 @@ end
 
 -- inspired by DXE's CreateWindow
 function Window:Create(name)
-	--[===[@debug@
-	assert(type(name) == "string")
-	assert(type(width) == "number")
-	assert(type(height) == "number")
-	--@end-debug@]===]
     local width = 50
     local height = 2*constants.titleBarInset+constants.titleHeight+3*constants.healthHeight+1
 
-	local properName = name:gsub(" ",""):gsub("'","")
+    local properName = name:gsub(" ",""):gsub("'","")
 
-	local window = CreateFrame("Frame","SilkWindow"..properName,UIParent,"BackdropTemplate")
-	window:SetWidth(width)
-	window:SetHeight(height)
-	window:SetMovable(true)
-	window:SetClampedToScreen(true)
-	window:SetResizable(true)
---	window:SetMinResize(width,height) -- @!!!
+    local window = CreateFrame("Frame","SilkWindow"..properName,UIParent,"BackdropTemplate")
+    window:SetWidth(width)
+    window:SetHeight(height)
+    window:SetMovable(true)
+    window:SetClampedToScreen(true)
+    window:SetResizable(true)
+--    window:SetMinResize(width,height) -- @!!!
     window:SetPoint("CENTER")
     window:SetBackdrop({
         bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
@@ -47,13 +42,13 @@ function Window:Create(name)
     })
 
     -- Inside
-	-- Important: Make sure faux_window:GetEffectiveScale() == UIParent:GetEffectiveScale() on creation
-	local faux_window = CreateFrame("Frame","SilkWindow"..properName.."Frame",window)
-	faux_window:SetWidth(width)
-	faux_window:SetHeight(height)
---	addon:RegisterBackground(faux_window)
-	faux_window:SetPoint("TOPLEFT")
-	window.faux_window = faux_window
+    -- Important: Make sure faux_window:GetEffectiveScale() == UIParent:GetEffectiveScale() on creation
+    local faux_window = CreateFrame("Frame","SilkWindow"..properName.."Frame",window)
+    faux_window:SetWidth(width)
+    faux_window:SetHeight(height)
+--    addon:RegisterBackground(faux_window)
+    faux_window:SetPoint("TOPLEFT")
+    window.faux_window = faux_window
 
     local corner = CreateFrame("Frame", nil, faux_window)
     corner:SetFrameLevel(faux_window:GetFrameLevel() + 9)

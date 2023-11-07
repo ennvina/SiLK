@@ -186,7 +186,7 @@ function Silk_ShowTimeLineColumn()
     -- show column here
     local interval = window.column[window.currentcolumn]
     Silk_Debug("Showing "..#interval.units.." unit(s), living from "..interval.starts.." (earliest) up to "..interval.ends.." (latest)")
-	for i=1,3 do
+    for i=1,3 do
         local tl = window.tl[i]
         if i <= #interval.units then
             local guid = interval.units[i]
@@ -328,8 +328,8 @@ end
 function Silk.CreateTimeLines(window)
     -- Time Lines
     window.tl = {}
-	for i=1,3 do
-		local tl = CreateFrame("Frame",nil,window.container)
+    for i=1,3 do
+        local tl = CreateFrame("Frame",nil,window.container)
         tl:SetPoint("TOPLEFT",window.container,"TOPLEFT",0,-constants.healthHeight*(i-1))
         tl:SetPoint("BOTTOMRIGHT",window.container,"TOPRIGHT",0,-constants.healthHeight*i)
 
@@ -340,8 +340,8 @@ function Silk.CreateTimeLines(window)
 
 --        tl:Hide()
 
-		window.tl[i] = tl
-	end
+        window.tl[i] = tl
+    end
 
     -- Time Line Controller
     local tlc = CreateFrame("Frame",nil,window.container)
@@ -405,13 +405,13 @@ function Silk.CreateTimeLines(window)
     tlc.recorddropdown = recorddropdown
 
     local valkyrlabel = tlc:CreateFontString(nil,"OVERLAY")
-	valkyrlabel:SetFont(GameFontNormal:GetFont(),9)
-	valkyrlabel:SetPoint("LEFT",tlc,"CENTER",0,0)
-	valkyrlabel:SetShadowOffset(1,-1)
-	valkyrlabel:SetShadowColor(0,0,0)
+    valkyrlabel:SetFont(GameFontNormal:GetFont(),9)
+    valkyrlabel:SetPoint("LEFT",tlc,"CENTER",0,0)
+    valkyrlabel:SetShadowOffset(1,-1)
+    valkyrlabel:SetShadowColor(0,0,0)
     valkyrlabel:SetFormattedText(SILK_VALKYR_X_ON_Y, 0, 0)
-	tlc.valkyrlabel = valkyrlabel
-    
+    tlc.valkyrlabel = valkyrlabel
+
     window.tlc = tlc
 
     -- adjust min-resize settings

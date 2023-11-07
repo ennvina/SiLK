@@ -34,7 +34,7 @@ function Silk:LoadDB()
     if (db.version < 080) then
         db.records = {}
     end
-    
+
     -- ultimate checks for corrupted addons
     if not db.enabled then
         db.enabled = true

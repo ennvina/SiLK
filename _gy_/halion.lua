@@ -19,13 +19,13 @@ end
 
 function halionproto:CreateBuffLabel()
     local leftmargin = 5
-	local bufflabel = self:CreateFontString(nil,"OVERLAY")
-	bufflabel:SetFont(GameFontNormal:GetFont(),12)
-	bufflabel:SetPoint("LEFT",self,"LEFT",constants.halionHeight+leftmargin,0)
-	bufflabel:SetShadowOffset(1,-1)
-	bufflabel:SetShadowColor(0,0,0)
+    local bufflabel = self:CreateFontString(nil,"OVERLAY")
+    bufflabel:SetFont(GameFontNormal:GetFont(),12)
+    bufflabel:SetPoint("LEFT",self,"LEFT",constants.halionHeight+leftmargin,0)
+    bufflabel:SetShadowOffset(1,-1)
+    bufflabel:SetShadowColor(0,0,0)
     bufflabel:SetTextColor(0,1,0,1)
-	self.bufflabel = bufflabel
+    self.bufflabel = bufflabel
 end
 
 function halionproto:SetMandatoryBuff(spellid)
@@ -147,7 +147,7 @@ function halionproto:UpdateUnit(unit)
         i = i+1
         b = UnitBuff(unit,i)
     end
-    
+
     if not percent then
         -- unable to decipher buffs
         return false
@@ -166,7 +166,7 @@ function Silk_CreateHalionPanels(window)
     window.halion = {}
     local topPoint = 0
 
-	local hfire = CreateFrame("Frame",nil,window.container)
+    local hfire = CreateFrame("Frame",nil,window.container)
     hfire:SetPoint("TOPLEFT",window.container,"TOPLEFT",0,-topPoint)
     hfire:SetPoint("BOTTOMRIGHT",window.container,"TOPRIGHT",0,-(topPoint+constants.halionHeight))
     for k,v in pairs(halionproto) do hfire[k]=v end
@@ -179,7 +179,7 @@ function Silk_CreateHalionPanels(window)
 
     topPoint = topPoint+constants.halionHeight
 
-	local hshadow = CreateFrame("Frame",nil,window.container)
+    local hshadow = CreateFrame("Frame",nil,window.container)
     hshadow:SetPoint("TOPLEFT",window.container,"TOPLEFT",0,-topPoint)
     hshadow:SetPoint("BOTTOMRIGHT",window.container,"TOPRIGHT",0,-(topPoint+constants.halionHeight))
     for k,v in pairs(halionproto) do hshadow[k]=v end

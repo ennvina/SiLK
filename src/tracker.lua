@@ -216,7 +216,7 @@ end
 --         local health = UnitHealth(unit)
 --         self.unit[guid].health = health
 --         self.unit[guid].touch = GetTime()
-    
+--
 --         if self.unit[guid].obsolete then
 --             self:UnregisterFromWindow(unit)
 --             Silk.Records:GetRecord():Forget(guid)

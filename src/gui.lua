@@ -21,7 +21,7 @@ local FrameUtils = {
         SilkDB.dimensions[name].width = f:GetWidth()
         SilkDB.dimensions[name].height = f:GetHeight()
     end,
-    
+
     LoadDimensions = function(self, f)
         self.frames[f:GetName()] = f
         self.resized[f:GetName()] = true
@@ -136,8 +136,8 @@ local Handlers = {
             else
                 local h = width * self.ratio
                 self:SetHeight(h)
-                -- self.faux_window:GetEffectiveScale() doesn't work because this 
-                -- handler is called again by SetHeight, which then causes the 
+                -- self.faux_window:GetEffectiveScale() doesn't work because this
+                -- handler is called again by SetHeight, which then causes the
                 -- calculated scale to become 1
                 local scale = (width * self:GetEffectiveScale()) / (self.faux_window:GetWidth() * UIParent:GetEffectiveScale())
                 self.faux_window:SetScale(scale)

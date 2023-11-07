@@ -80,13 +80,13 @@ function hpproto:CreateStunIcon()
 end
 
 function hpproto:CreateStunLabel()
-	local stunlabel = self.mainframe:CreateFontString(nil,"OVERLAY")
-	stunlabel:SetFont(GameFontNormal:GetFont(),12)
-	stunlabel:SetPoint("LEFT",self,"LEFT",0,0)
-	stunlabel:SetShadowOffset(1,-1)
-	stunlabel:SetShadowColor(0,0,0)
+    local stunlabel = self.mainframe:CreateFontString(nil,"OVERLAY")
+    stunlabel:SetFont(GameFontNormal:GetFont(),12)
+    stunlabel:SetPoint("LEFT",self,"LEFT",0,0)
+    stunlabel:SetShadowOffset(1,-1)
+    stunlabel:SetShadowColor(0,0,0)
     stunlabel:SetTextColor(0,1,0,1)
-	self.stunlabel = stunlabel
+    self.stunlabel = stunlabel
 end
 
 function hpproto:CreateRaidIcon()
@@ -121,7 +121,7 @@ function hpproto:SetName(name)
         self:CreateNameLabel()
     end
     self.namelabel.text = name
-	self.namelabel:SetText(name)
+    self.namelabel:SetText(name)
 end
 
 function hpproto:SetStun(spell, expiration, caster)
@@ -290,8 +290,8 @@ end
 -- inspired by DXE's health panels
 function Silk.CreateHealthPanels(window,minhealth,maxhealth)
     window.hp = {}
-	for i=1,3 do
-		local hp = CreateFrame("Frame",nil,window.container)
+    for i=1,3 do
+        local hp = CreateFrame("Frame",nil,window.container)
         hp:SetPoint("TOPLEFT",window.container,"TOPLEFT",0,-constants.healthHeight*(i-1))
         hp:SetPoint("BOTTOMRIGHT",window.container,"TOPRIGHT",0,-constants.healthHeight*i)
 
@@ -304,6 +304,6 @@ function Silk.CreateHealthPanels(window,minhealth,maxhealth)
 
         hp:Hide()
 
-		window.hp[i] = hp
-	end
+        window.hp[i] = hp
+    end
 end
