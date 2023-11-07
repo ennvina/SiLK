@@ -231,7 +231,6 @@ local Tooltip = {
 -- EXPORTS
 ---------------------------------------
 
-Silk.windows = {}
 Silk.FrameUtils = FrameUtils
 Silk.Handlers = Handlers
 Silk.Tooltip = Tooltip

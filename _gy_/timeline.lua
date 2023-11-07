@@ -153,7 +153,7 @@ function tlproto:Clear()
 end
 
 function Silk_GetAAAWindow()
-    return Silk.windows[constants.windowname.aaa]
+    return Silk.Window:GetByName(constants.windowname.aaa)
 end
 
 function Silk_UpdateTimeLineControls()

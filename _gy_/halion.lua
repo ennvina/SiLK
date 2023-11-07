@@ -192,11 +192,11 @@ function Silk_CreateHalionPanels(window)
 
     -- adjust min-resize settings
     -- local width = 50
-    -- local height = 2*titleBarInset+titleHeight+2*constants.halionHeight+1
+    -- local height = 2*constants.titleBarInset+constants.titleHeight+2*constants.halionHeight+1
     -- window:SetMinResize(width,height) -- @!!!
 end
 
-function Silk_UpdateHalionPanels(window)
+function Silk.UpdateHalionPanels(window)
     if UnitAffectingCombat("player") then
         window.incombat = true
     else

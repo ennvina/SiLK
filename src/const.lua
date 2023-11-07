@@ -3,6 +3,10 @@ local _, Silk = ...
 Silk.Constants = {
     nbstunicons = 3,   -- suppose 3 stuns maximum, i.e. no D.R. reset
 
+    buttonSize = 10,
+    titleHeight = 11,
+    titleBarInset = 2,
+
     healthHeight = 20,
     healthInset = 1,
 

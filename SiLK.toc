@@ -15,6 +15,7 @@ src/record.lua
 src/time.lua
 src/tr.lua
 src/tracker.lua
+src/window.lua
 
 src/Silk.lua
 src/Silk.xml

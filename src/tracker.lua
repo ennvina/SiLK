@@ -15,11 +15,7 @@ local tracker = {
 function tracker:UnitIsValkyr(unit)
     local guid = UnitGUID(unit)
     local npcid = tonumber("0x"..guid:sub(7,10))
-    -- if customnpcid then
-    --     return npcid == customnpcid
-    -- else
-        return npcid == self.defaultnpcid
-    -- end
+    return npcid == self.defaultnpcid
 end
 
 function tracker:UnitIsTracked(unit)
@@ -76,7 +72,7 @@ function tracker:UpdateUnit(unit)
 end
 
 function tracker:GetValkyrWindow()
-    return Silk.windows[self.localwindowname]
+    return Silk.Window:GetByName(self.localwindowname)
 end
 
 function tracker:RegisterToWindow(unit)

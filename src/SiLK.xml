@@ -6,16 +6,16 @@
   <Script file="Silk.lua"/>
   <Frame name="SilkFrame">
     <Scripts>
-      <OnLoad> self:RegisterEvent("ADDON_LOADED"); self:RegisterEvent("CHAT_MSG_ADDON"); </OnLoad>
-      <OnEvent> Silk_OnEvent(self, event, ...); </OnEvent>
-      <OnUpdate> Silk_OnUpdate(); </OnUpdate>
-  </Scripts>
-  </Frame>
-  <GameTooltip name="CorpoTooltip" inherits="GameTooltipTemplate">
-    <Scripts>
-      <Onload>
-        self:SetOwner(WorldFrame, "ANCHOR_NONE");
-      </Onload>
+      <OnLoad>
+        self:RegisterEvent("ADDON_LOADED");
+        self:RegisterEvent("CHAT_MSG_ADDON");
+      </OnLoad>
+      <OnEvent>
+        Silk_OnEvent(self, event, ...);
+      </OnEvent>
+      <OnUpdate>
+        Silk_OnUpdate();
+      </OnUpdate>
     </Scripts>
-  </GameTooltip>
+  </Frame>
 </Ui>
