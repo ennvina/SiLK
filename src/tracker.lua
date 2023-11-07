@@ -52,7 +52,7 @@ function tracker:CheckUnitObsolete(unit)
         Silk_Debug("Unit gained life")
     elseif UnitCastingInfo(unit) then -- Val'kyr is casting something
         self.unit[guid].obsolete = true
-        Silk_Debug("Unit casted something")
+        Silk_Debug("Unit did cast something")
     end
     self.unit[guid].health = health
     self.unit[guid].touch = GetTime()
@@ -154,7 +154,7 @@ function tracker:Update()
         if Silk.Records:GetLastRecord() and Silk.Records:GetLastRecord().recording then
             Silk.Records:GetLastRecord():End()
             Silk_Debug("Record stopped")
-            Silk.UpdateTimeLines()
+--            Silk.UpdateTimeLines()
         end
         return
     end
