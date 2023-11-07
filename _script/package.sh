@@ -38,7 +38,7 @@ mkdir -p ./_release/$AddonName || bye "Cannot create directory"
 echo
 
 echo -n "Copying files... "
-cp -R changelog.md LICENSE $AddonName.* src ./_release/$AddonName/ || bye "Cannot copy files"
+cp -R changelog.md LICENSE $AddonName.* src icons ./_release/$AddonName/ || bye "Cannot copy files"
 cd ./_release || bye "Cannot cd to directory"
 echo
 

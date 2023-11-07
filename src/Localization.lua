@@ -55,7 +55,7 @@ else
   SILK_COMMANDHELP5 = "\"" .. SILK_SLASHCMD1 .. " stun showraid\" to show/hide on the raid channel when a Val'kyr is under a stun effect"
   SILK_COMMANDHELP6 = "\"" .. SILK_SLASHCMD1 .. " npc <npcid>\" to force the NPC id to track (by default each window has its own ID, e.g. 36609 (Val'kyr Shadowguard) for the Val'kyr window), this will override NPC id of all windows (Val'kyr window, Spitecaller window, ...) and will be reset when the interface is reloaded"
   SILK_COMMANDHELP7 = "\"" .. SILK_SLASHCMD1 .. " timeout <duration>\" to set the duration (in seconds) from which a Val'kyr is supposed unimportant if no one targetted it"
-  SILK_COMMANDHELP8 = "\"" .. SILK_SLASHCMD1 .. " channel <channel>\" to select a channel to announce stuns to (by default : default)"
+  SILK_COMMANDHELP8 = "\"" .. SILK_SLASHCMD1 .. " channel <channel>\" to select a channel to announce stuns to (by default: default)"
   SILK_COMMANDHELP9 = "\"" .. SILK_SLASHCMD1 .. " test\" to display test data into the Val'kyr window"
   SILK_COMMANDHELP0 = "\"" .. SILK_SLASHCMD1 .. " help\" to display the full command list"
   SILK_WELCOME = SILK_NAME .. " loaded. Please enter " .. SILK_COMMANDHELP0 .. ".";
@@ -71,7 +71,7 @@ else
   SILK_TIMEOUT_SET_MESSAGE = "Timeout set to %d second(s)."
   SILK_TOO_MANY_UNITS_WARNING = "Too many units registered simultaneously."
   SILK_CHANNEL_MESSAGE = "Stun channel set to %s."
-  SILK_VALKYR_X_ON_Y = "Val'kyr : %d / %d"
+  SILK_VALKYR_X_ON_Y = "Val'kyr: %d / %d"
   SILK_INCREASE_MATCH = "increase"
   SILK_DECREASE_MATCH = "reduce"
 

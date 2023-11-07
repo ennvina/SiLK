@@ -7,6 +7,15 @@
 ## LoadOnDemand: 0
 ## SavedVariables: SilkDB
 
+src/const.lua
+src/db.lua
+src/gui.lua
+src/hp.lua
+src/record.lua
+src/time.lua
+src/timeline.lua
+src/tracker.lua
+
 src/Localization.lua
 src/Silk.lua
 src/Silk.xml

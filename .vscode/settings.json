@@ -27,6 +27,7 @@
         "UnitIsGroupLeader",
         "UnitIsUnit",
         "UnitName",
-        "SendChatMessage"
+        "SendChatMessage",
+        "SlashCmdList"
     ]
 }
