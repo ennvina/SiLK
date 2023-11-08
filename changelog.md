@@ -1,5 +1,14 @@
 ## SiLK Changelog
 
+#### v1.3-beta (2023-11-07)
+
+- Public repository on GitHub
+- Major code cleanup, although there is still much to be done
+- Window height is now constrained
+- Moving and resizing the window is now simpler
+- Textures now use game files instead of embedding custom files
+- Outside of /silk show, most command lines are work in progress
+
 #### v1.2-beta (2023-11-05)
 
 - Resurrection of ancient code, written back in 2009
