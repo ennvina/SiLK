@@ -196,14 +196,6 @@ local Handlers = {
         FrameUtils:SavePosition(self.window)
     end,
 
-    Button_OnLeave = function(self)
-        self.t:SetVertexColor(0.33,0.33,0.33)
-    end,
-
-    Button_OnEnter = function(self)
-        self.t:SetVertexColor(0,1,0)
-    end,
-
     Close_OnClick = function(self)
         self.window:Hide()
         SilkDB.visible[self.window:GetName()].show = false
