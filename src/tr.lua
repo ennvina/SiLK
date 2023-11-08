@@ -23,8 +23,7 @@ if GetLocale() == "frFR" then
   SILK_COMMANDHELP0 = "\"" .. SILK_SLASHCMD1 .. " help\" pour lister toutes les commandes"
   SILK_WELCOME = SILK_NAME .. " chargé. Entrez " .. SILK_COMMANDHELP0 .. ".";
   SILK_PROMOTENEEDED = "Vous devez être chef de raid ou assistant pour marquer les cibles."
-  SILK_MOVE_TOOLTIP = "|cffffff00Maj + Clic|r pour déplacer"
-  SILK_RESIZE_TOOLTIP = "|cffffff00Clic|r pour étirer".."\n".."|cffffff00Maj + Clic|r pour redimensionner"
+  SILK_RESIZE_TOOLTIP = "|cffffff00Clic|r pour redimensionner".."\n".."|cffffff00Maj + Clic|r pour étirer"
   SILK_CLOSE_TOOLTIP = "Fermer"
   SILK_CANT_TEST = "Vous devez d'abord afficher la fenêtre des Val'kyrs. Entrez /silk show"
   SILK_STUN_SHOWRAID_ENABLED = "Les stun de Val'kyr seront affichés sur le canal raid."
@@ -54,8 +53,7 @@ else
   SILK_COMMANDHELP0 = "\"" .. SILK_SLASHCMD1 .. " help\" to display the full command list"
   SILK_WELCOME = SILK_NAME .. " loaded. Please enter " .. SILK_COMMANDHELP0 .. ".";
   SILK_PROMOTENEEDED = "You must be raid leader or assistant in order to mark targets."
-  SILK_MOVE_TOOLTIP = "|cffffff00Shift + Click|r to move"
-  SILK_RESIZE_TOOLTIP = "|cffffff00Click|r to scale".."\n".."|cffffff00Shift + Click|r to resize"
+  SILK_RESIZE_TOOLTIP = "|cffffff00Click|r to resize".."\n".."|cffffff00Shift + Click|r to scale"
   SILK_CLOSE_TOOLTIP = "Close"
   SILK_CANT_TEST = "You must display the Val'kyr window first. Please type /silk show"
   SILK_STUN_SHOWRAID_ENABLED = "Val'kyr stuns will be displayed on the raid channel."

@@ -21,18 +21,24 @@ end
 
 -- inspired by DXE's CreateWindow
 function Window:Create(name)
-    local width = 50
-    local height = 2*constants.titleBarInset+constants.titleHeight+3*constants.healthHeight+1
-
     local properName = name:gsub(" ",""):gsub("'","")
 
     local window = CreateFrame("Frame","SilkWindow"..properName,UIParent,"BackdropTemplate")
-    window:SetWidth(width)
-    window:SetHeight(height)
-    window:SetMovable(true)
+    window.defaultWidth = 250
+    window.defaultHeight = 2*constants.titleBarInset+constants.titleHeight+3*constants.healthHeight+1
+    window.minWidth = 0 -- No lower limit for width, to avoid scale locks
+    window.minHeight = window.defaultHeight -- Locked height
+    window.maxWidth = 1000
+    window.maxHeight = window.defaultHeight -- Locked height
     window:SetClampedToScreen(true)
+    window:SetWidth(window.defaultWidth)
+    window:SetHeight(window.defaultHeight)
     window:SetResizable(true)
---    window:SetMinResize(width,height) -- @!!!
+    window:EnableMouse(true)
+    window:SetMovable(true)
+    window:SetScript("OnMouseDown",handlers.Window_OnMouseDown)
+    window:SetScript("OnMouseUp",handlers.Window_OnMouseUp)
+    window:SetResizeBounds(window.minWidth, window.minHeight, window.maxWidth, window.maxHeight)
     window:SetPoint("CENTER")
     window:SetBackdrop({
         bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
@@ -44,13 +50,15 @@ function Window:Create(name)
     -- Inside
     -- Important: Make sure faux_window:GetEffectiveScale() == UIParent:GetEffectiveScale() on creation
     local faux_window = CreateFrame("Frame","SilkWindow"..properName.."Frame",window)
-    faux_window:SetWidth(width)
-    faux_window:SetHeight(height)
---    addon:RegisterBackground(faux_window)
+    faux_window.defaultWidth = window:GetWidth()
+    faux_window.defaultHeight = window:GetHeight()
+    faux_window:SetWidth(faux_window.defaultWidth)
+    faux_window:SetHeight(faux_window.defaultHeight)
     faux_window:SetPoint("TOPLEFT")
     window.faux_window = faux_window
+    faux_window.window = window
 
-    local corner = CreateFrame("Frame", nil, faux_window)
+    local corner = CreateFrame("Button", nil, faux_window)
     corner:SetFrameLevel(faux_window:GetFrameLevel() + 9)
     corner:EnableMouse(true)
     corner:SetScript("OnMouseDown", handlers.Corner_OnMouseDown)
@@ -58,9 +66,18 @@ function Window:Create(name)
     corner:SetHeight(12)
     corner:SetWidth(12)
     corner:SetPoint("BOTTOMRIGHT")
-    corner.t = corner:CreateTexture(nil,"ARTWORK")
-    corner.t:SetAllPoints(true)
-    corner.t:SetTexture("Interface\\Addons\\SiLK\\icons\\ResizeGrip.tga") -- taken from DXE
+    corner.tNormal = corner:CreateTexture(nil,"ARTWORK")
+    corner.tNormal:SetAllPoints(true)
+    corner.tNormal:SetTexture("interface/chatframe/ui-chatim-sizegrabber-up")
+    corner:SetNormalTexture(corner.tNormal)
+    corner.tPushed = corner:CreateTexture(nil,"ARTWORK")
+    corner.tPushed:SetAllPoints(true)
+    corner.tPushed:SetTexture("interface/chatframe/ui-chatim-sizegrabber-down")
+    corner:SetPushedTexture(corner.tPushed)
+    corner.tHLight = corner:CreateTexture(nil,"ARTWORK")
+    corner.tHLight:SetAllPoints(true)
+    corner.tHLight:SetTexture("interface/chatframe/ui-chatim-sizegrabber-highlight")
+    corner:SetHighlightTexture(corner.tHLight)
     Tooltip.AddText(corner,SILK_RESIZE_TOOLTIP)
     corner.window = window
 
@@ -68,18 +85,11 @@ function Window:Create(name)
     local border = CreateFrame("Frame",nil,faux_window)
     border:SetAllPoints(true)
     border:SetFrameLevel(border:GetFrameLevel()+10)
---    addon:RegisterBorder(border)
 
     -- Title Bar
     local titlebar = CreateFrame("Frame",nil,faux_window)
     titlebar:SetPoint("TOPLEFT",faux_window,"TOPLEFT",constants.titleBarInset,-constants.titleBarInset)
     titlebar:SetPoint("BOTTOMRIGHT",faux_window,"TOPRIGHT",-constants.titleBarInset, -(constants.titleHeight+constants.titleBarInset))
-    titlebar:EnableMouse(true)
-    titlebar:SetMovable(true)
-    titlebar:SetScript("OnMouseDown",handlers.Title_OnMouseDown)
-    titlebar:SetScript("OnMouseUp",handlers.Title_OnMouseUp)
-    Tooltip.AddText(titlebar,SILK_MOVE_TOOLTIP)
---    self:RegisterMoveSaving(titlebar,"CENTER","UIParent","CENTER",0,0,true,window)
     titlebar.window = window
 
     local gradient = titlebar:CreateTexture(nil,"ARTWORK")

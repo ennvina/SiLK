@@ -55,6 +55,9 @@ local FrameUtils = {
         local scale = SilkDB.scales[name]
         if scale then
             f:SetScale(scale)
+            if f.window then
+                self:SetResizeBounds(f.window, scale)
+            end
         else
             SilkDB.scales[name] = f:GetScale()
         end
@@ -108,13 +111,32 @@ local FrameUtils = {
             end
             if self.scaled[n] then
                 f:SetScale(1)
+                if f.window then
+                    self:SetResizeBounds(f.window, 1)
+                end
                 self:SaveScale(f)
             end
             if self.resized[n] then
-                f:SetWidth(200)
-                f:SetHeight(200)
+                if f.defaultWidth then
+                    print("Setting default width "..f.defaultWidth.." for "..n)
+                    f:SetWidth(f.defaultWidth)
+                else
+                    f:SetWidth(250)
+                end
+                if f.defaultHeight then
+                    print("Setting default height "..f.defaultHeight.." for "..n)
+                    f:SetHeight(f.defaultHeight)
+                else
+                    f:SetHeight(2*Silk.Constants.titleBarInset+Silk.Constants.titleHeight+3*Silk.Constants.healthHeight+1)
+                end
                 self:SaveDimensions(f)
             end
+        end
+    end,
+
+    SetResizeBounds = function(self, f, scale)
+        if f.minWidth and f.minHeight and f.maxWidth and f.maxHeight then
+            f:SetResizeBounds(f.minWidth*scale, f.minHeight*scale, math.min(f.maxWidth*scale, 1920), math.min(f.maxHeight*scale, 1080))
         end
     end,
 }
@@ -126,13 +148,11 @@ local FrameUtils = {
 local Handlers = {
     Anchor_OnSizeChanged = function(self, width, height)
         if self._sizing then
-            if not self.__noresizing and IsShiftKeyDown() then
+            if not IsShiftKeyDown() then
                 self.ratio = height / width
 
                 self.faux_window:SetWidth((width * self:GetEffectiveScale()) / self.faux_window:GetEffectiveScale())
                 self.faux_window:SetHeight((height * self:GetEffectiveScale()) / self.faux_window:GetEffectiveScale())
-
---                self:Fire("OnSizeChanged")
             else
                 local h = width * self.ratio
                 self:SetHeight(h)
@@ -141,8 +161,7 @@ local Handlers = {
                 -- calculated scale to become 1
                 local scale = (width * self:GetEffectiveScale()) / (self.faux_window:GetWidth() * UIParent:GetEffectiveScale())
                 self.faux_window:SetScale(scale)
-
---                self:Fire("OnScaleChanged")
+                FrameUtils:SetResizeBounds(self, scale)
             end
         end
         if self.hp then
@@ -152,15 +171,15 @@ local Handlers = {
         end
     end,
 
-    Title_OnMouseDown = function(self)
-        if IsShiftKeyDown() then
-            self.window:StartMoving()
+    Window_OnMouseDown = function(self)
+        if not SilkDB.locked then
+            self:StartMoving()
         end
     end,
 
-    Title_OnMouseUp = function(self)
-        self.window:StopMovingOrSizing()
-        FrameUtils:SavePosition(self.window)
+    Window_OnMouseUp = function(self)
+        self:StopMovingOrSizing()
+        FrameUtils:SavePosition(self)
     end,
 
     Corner_OnMouseDown = function(self)
