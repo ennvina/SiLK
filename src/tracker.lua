@@ -9,12 +9,11 @@ local constants = Silk.Constants
 local tracker = {
     unit = {},
     localwindowname = constants.windowname.valkyr,
-    defaultnpcid = 36609  -- real Val'kyr ID
+    defaultnpcid = "36609"  -- real Val'kyr ID
 }
 
-function tracker:UnitIsValkyr(unit)
-    local guid = UnitGUID(unit)
-    local npcid = tonumber("0x"..guid:sub(7,10))
+function tracker:UnitIsValkyr(guid)
+    local npcid = guid:sub(25,29)
     return npcid == self.defaultnpcid
 end
 

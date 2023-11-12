@@ -2,6 +2,7 @@
 
 #### v1.4-beta (2023-11-xx)
 
+- Fixed NPC detection, for Val'kyrs are now known as 'vehicle'
 - Added all ranks of stun spells and abilites, when applicable
 - Optimized code to detect stuns
 
