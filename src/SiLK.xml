@@ -18,4 +18,12 @@
       </OnUpdate>
     </Scripts>
   </Frame>
+  <StatusBar name="SilkStatusBarTemplate" virtual="true">
+    <Anchors>
+      <Anchor point="BOTTOMLEFT" x="2" y="2"/>
+      <Anchor point="TOPRIGHT" x="-2" y="-2"/>
+    </Anchors>
+    <BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+    <BarColor r="0" g="0.75" b="0"/>
+  </StatusBar>
 </Ui>

@@ -24,19 +24,7 @@ function hpproto:CreateMainFrame()
 end
 
 function hpproto:CreateHealthBar()
-    local inset = 2
-    local healthbar = CreateFrame("Frame",nil,self.mainframe)
-    healthbar:SetPoint("BOTTOMLEFT",self.mainframe,"BOTTOMLEFT",inset,inset)
-    healthbar:SetPoint("TOPRIGHT",self.mainframe,"TOPRIGHT",-inset,-inset)
-
-    local r1,g1,b1 = 0,0.25,0.125;
-    local r2,g2,b2 = 0,0.75,0;
---    local gradient = healthbar:CreateTexture(nil,"ARTWORK")
---    gradient:SetAllPoints(true)
---    gradient:SetTexture(1,1,1,1)
---    gradient:SetGradient("VERTICAL",r1,g1,b1,r2,g2,b2) -- @!!!
---    healthbar.gradient = gradient
-
+    local healthbar = CreateFrame("StatusBar", nil, self.mainframe, "SilkStatusBarTemplate")
     healthbar:SetFrameLevel(self.mainframe:GetFrameLevel()-1)
     self.healthbar = healthbar
 end
@@ -282,12 +270,13 @@ end
 function hpproto:UpdateSize()
     if self.healthbar then
         if self.total > 0 then
-            local minhealth = isHeroicRaid() and 0.5 or 0
-            local maxhealth = 1
-            local width = self.healthbar:GetWidth()*(1/(maxhealth-minhealth))*(math.min(math.max(self.health/self.total,minhealth),maxhealth)-minhealth) -- minhealth% - maxhealth%
---            self.healthbar.gradient:SetPoint("RIGHT",self.healthbar,"LEFT",width,0)
+            local minhealth = isHeroicRaid() and (self.total/2) or 0
+            local maxhealth = self.total
+            self.healthbar:SetMinMaxValues(minhealth, maxhealth)
+            self.healthbar:SetValue(self.health)
         else
---            self.healthbar.gradient:SetPoint("RIGHT",self.healthbar,"LEFT",0,0)
+            self.healthbar:SetMinMaxValues(0, 1)
+            self.healthbar:SetValue(0)
         end
     end
 end
