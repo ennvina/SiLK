@@ -236,21 +236,19 @@ function hpproto:UpdateUnit(unit)
 
     -- look into debuff lists to check if a stun is applied
     local i = 1
-    local debuff, _, _, _, _, _, expirationTime, unitCaster, _, _, spellId = UnitDebuff(unit, i)
+    local debuff, _, _, _, _, expirationTime, unitCaster, _, _, spellId = UnitDebuff(unit, i)
     while debuff do
-        for j,stunId in pairs(constants.stunspells) do
-            if spellId == stunId then
-                if not self.stun or (self.stun.spell ~= spellId) or (self.stun.expiration ~= expirationTime) or (self.stun.caster ~= unitCaster) then
-                    -- stun found, more precisely a new stun
-                    self:SetStun(spellId, expirationTime, unitCaster)
-                    local duration = math.max(expirationTime-GetTime(),0)
-                    record:SetStun(guid, spellId, duration, UnitName(unitCaster))
-                end
-                return
+        if constants.stunspells[spellId] then
+            if not self.stun or (self.stun.spell ~= spellId) or (self.stun.expiration ~= expirationTime) or (self.stun.caster ~= unitCaster) then
+                -- stun found, more precisely a new stun
+                self:SetStun(spellId, expirationTime, unitCaster)
+                local duration = math.max(expirationTime-GetTime(),0)
+                record:SetStun(guid, spellId, duration, UnitName(unitCaster))
             end
+            return
         end
         i = i + 1
-        debuff,_,_,_,_,_,expirationTime,unitCaster,_,_,spellId = UnitDebuff(unit, i)
+        debuff, _, _, _, _, expirationTime, unitCaster, _, _, spellId = UnitDebuff(unit, i)
     end
 end
 

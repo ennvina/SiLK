@@ -158,37 +158,19 @@ function tracker:Update()
     local units = {}
 
     -- look for every target val'kyr, but do not report the same val'kyr twice
-    if UnitExists("target") and self:UnitIsValkyr("target") then
-        units["target"] = true  -- always insert self target first
-    end
+    local candidates = { "target", "focus", "targettarget", "focustarget" }
     for i=1,40 do
-        local unit = "raid"..i.."target"
-        if UnitExists(unit) and self:UnitIsValkyr(unit) then
-            local exists = false
-            for u in pairs(units) do
-                if UnitIsUnit(unit,u) then
-                    exists = true
-                    break
-                end
-            end
-            if not exists then
-                units[unit] = true
-            end
-        end
+        table.insert(candidates, "raid"..i.."target")
     end
     for i=1,5 do
-        local unit = "boss"..i
-        if UnitExists(unit) and self:UnitIsValkyr(unit) then
-            local exists = false
-            for u in pairs(units) do
-                if UnitIsUnit(unit,u) then
-                    exists = true
-                    break
-                end
-            end
-            if not exists then
-                units[unit] = true
-            end
+        table.insert(candidates, "boss"..i)
+    end
+    local trackedGUIDs = {}
+    for _, unit in ipairs(candidates) do
+        local guid = UnitGUID(unit)
+        if guid and not trackedGUIDs[guid] and UnitExists(unit) and self:UnitIsValkyr(guid) then
+            units[unit] = true
+            trackedGUIDs[guid] = true
         end
     end
 

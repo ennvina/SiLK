@@ -233,14 +233,21 @@ function Window:StartTest()
 
     local hp = valkyrwindow.hp
 
+    local testStunSpells = {}
+    for id, _ in pairs(constants.stunspells) do
+        if GetSpellInfo(id) then -- In case spell is from a wrong expansion
+            table.insert(testStunSpells, id)
+        end
+    end
+
     for i=1,3 do
         if not hp[i]:IsShown() then hp[i]:Show() end
         local health = 400+math.random(60)*10
         local total = 1000
         local raidicon = math.random(3)+3*(i-1)-1
-        local spell = constants.stunspells[math.random(#constants.stunspells)]
-        while not GetSpellInfo(spell) do -- In case we fetch spell from a wrong expansion
-            spell = constants.stunspells[math.random(#constants.stunspells)]
+        local spell = testStunSpells[math.random(#testStunSpells)]
+        while not GetSpellInfo(spell) do
+            spell = testStunSpells[math.random(#testStunSpells)]
         end
         local duration = math.random(6)/math.random(3)
         hp[i]:SetHP(health,total)

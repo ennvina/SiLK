@@ -1,5 +1,10 @@
 ## SiLK Changelog
 
+#### v1.4-beta (2023-11-xx)
+
+- Added all ranks of stun spells and abilites, when applicable
+- Optimized code to detect stuns
+
 #### v1.3-beta (2023-11-07)
 
 - Public repository on GitHub
