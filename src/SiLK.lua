@@ -52,7 +52,7 @@ function Silk_OnEvent(self, event, ...)
     if addonName:lower() == "silk" then
       Silk_Message(SILK_WELCOME)
       Silk:LoadDB()
-      Silk_LoadRecords()
+--      Silk_LoadRecords() -- Fix issues first
       Window:RestoreAll()
     end
   end

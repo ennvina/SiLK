@@ -7,6 +7,7 @@
 - Optimized code to detect stuns
 - Fix Val'kyr HP bar color
 - Track Val'kyr HP at 0-100% in normal mode and 50-100% in heroic mode
+- Remove records temporarily until they are resolved
 
 #### v1.3-beta (2023-11-07)
 
