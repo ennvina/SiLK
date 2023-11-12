@@ -168,15 +168,11 @@ function Window:Create(name)
 end
 
 function Window:CreateContents(window, name)
-    if name == constants.windowname.valkyr then
-        -- @todo set HP bar 0%-100% in normal mode
-        Silk.CreateHealthPanels(window,0.5,1) -- 50% - 100%
-    elseif name == constants.windowname.spitecaller then
-        Silk.CreateHealthPanels(window,0,1) -- 0% - 100%
-    elseif name == constants.windowname.adherent then
-        Silk.CreateHealthPanels(window,0,1) -- 0% - 100%
-    elseif name == constants.windowname.sk then
-        Silk.CreateHealthPanels(window,0,1) -- 0% - 100%
+    if name == constants.windowname.valkyr
+    or name == constants.windowname.spitecaller
+    or name == constants.windowname.adherent
+    or name == constants.windowname.sk then
+        Silk.CreateHealthPanels(window)
     elseif name == constants.windowname.aaa then
         Silk.CreateTimeLines(window)
     elseif name == constants.windowname.corpo then

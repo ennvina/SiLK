@@ -272,11 +272,18 @@ function hpproto:Update()
     self:UpdateStunDuration()
 end
 
+local function isHeroicRaid()
+    local difficulyID = GetRaidDifficultyID()
+    if difficulyID then
+        return select(3,GetDifficultyInfo(difficulyID))
+    end
+end
+
 function hpproto:UpdateSize()
     if self.healthbar then
         if self.total > 0 then
-            local minhealth = self.minhealth or 0
-            local maxhealth = self.maxhealth or 1
+            local minhealth = isHeroicRaid() and 0.5 or 0
+            local maxhealth = 1
             local width = self.healthbar:GetWidth()*(1/(maxhealth-minhealth))*(math.min(math.max(self.health/self.total,minhealth),maxhealth)-minhealth) -- minhealth% - maxhealth%
 --            self.healthbar.gradient:SetPoint("RIGHT",self.healthbar,"LEFT",width,0)
         else
@@ -286,7 +293,7 @@ function hpproto:UpdateSize()
 end
 
 -- inspired by DXE's health panels
-function Silk.CreateHealthPanels(window,minhealth,maxhealth)
+function Silk.CreateHealthPanels(window)
     window.hp = {}
     for i=1,3 do
         local hp = CreateFrame("Frame",nil,window.container)
@@ -294,9 +301,6 @@ function Silk.CreateHealthPanels(window,minhealth,maxhealth)
         hp:SetPoint("BOTTOMRIGHT",window.container,"TOPRIGHT",0,-constants.healthHeight*i)
 
         for k,v in pairs(hpproto) do hp[k]=v end
-
-        hp.minhealth = minhealth
-        hp.maxhealth = maxhealth
 
         hp:CreateMainFrame()
 
