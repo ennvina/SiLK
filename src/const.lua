@@ -23,8 +23,6 @@ Silk.Constants = {
     },
 
     stunspells = {
-        [20185] = true,    -- paladin - Judgement of Light, for testing purposes
-
         [47481] = true,  -- Death Knight - Gnaw (Ghoul stun)
 
         [5211] = true,   -- Druid - Bash (Bear stun) - rank 1
