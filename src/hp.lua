@@ -231,7 +231,7 @@ end
 
 function hpproto:UpdateSize()
     if self.healthbar then
-        if self.total > 0 then
+        if self.total and self.total > 0 then
             local minhealth = isHeroicRaid() and (self.total/2) or 0
             local maxhealth = self.total
             self.healthbar:SetMinMaxValues(minhealth, maxhealth)

@@ -12,6 +12,7 @@ local FrameUtils = {
     moved = {},
     resized = {},
     scaled = {},
+    backup = {},
 
     SaveDimensions = function(self, f)
         self.frames[f:GetName()] = f
@@ -103,32 +104,53 @@ local FrameUtils = {
         end
     end,
 
+    Backup = function(self, f)
+        local dims = {}
+        dims.width = f:GetWidth()
+        dims.height = f:GetHeight()
+
+        local scale = {}
+        scale.scale = f:GetScale()
+
+        local point, relativeTo, relativePoint, xOfs, yOfs = f:GetPoint()
+        local pos = {}
+        pos.point = point
+        pos.relativeTo = relativeTo and relativeTo:GetName()
+        pos.relativePoint = relativePoint
+        pos.xOfs = xOfs
+        pos.yOfs = yOfs
+
+        self.frames[f:GetName()] = f
+        self.backup[f:GetName()] = { dims=dims, scale=scale, pos=pos }
+    end,
+
     ResetAll = function(self)
         for n,f in pairs(self.frames) do
+            local backup = self.backup[n]
             if self.moved[n] then
-                f:SetPoint("CENTER",UIParent,"CENTER",0,0)
+                f:ClearAllPoints()
+                local pos = backup and backup.pos
+                if pos then
+                    f:SetPoint(pos.point,_G[pos.relativeTo] or UIParent,pos.relativePoint,pos.xOfs,pos.yOfs)
+                else
+                    f:SetPoint("CENTER",UIParent,"CENTER",0,0)
+                end
                 self:SavePosition(f)
             end
             if self.scaled[n] then
-                f:SetScale(1)
+                local scale = backup and backup.scale and backup.scale.scale or 1
+                f:SetScale(scale)
                 if f.window then
-                    self:SetResizeBounds(f.window, 1)
+                    self:SetResizeBounds(f.window, scale)
                 end
                 self:SaveScale(f)
             end
             if self.resized[n] then
-                if f.defaultWidth then
-                    print("Setting default width "..f.defaultWidth.." for "..n)
-                    f:SetWidth(f.defaultWidth)
-                else
-                    f:SetWidth(250)
-                end
-                if f.defaultHeight then
-                    print("Setting default height "..f.defaultHeight.." for "..n)
-                    f:SetHeight(f.defaultHeight)
-                else
-                    f:SetHeight(2*Silk.Constants.titleBarInset+Silk.Constants.titleHeight+3*Silk.Constants.healthHeight+1)
-                end
+                local dims = backup and backup.dims
+                local width = dims and dims.width or f.defaultWidth or 300
+                local height = dims and dims.height or 2*Silk.Constants.titleBarInset+Silk.Constants.titleHeight+3*Silk.Constants.healthHeight+1
+                f:SetWidth(width)
+                f:SetHeight(height)
                 self:SaveDimensions(f)
             end
         end

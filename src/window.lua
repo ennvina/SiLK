@@ -24,7 +24,7 @@ function Window:Create(name)
     local properName = name:gsub(" ",""):gsub("'","")
 
     local window = CreateFrame("Frame","SilkWindow"..properName,UIParent,"BackdropTemplate")
-    window.defaultWidth = 250
+    window.defaultWidth = 256
     window.defaultHeight = 2*constants.titleBarInset+constants.titleHeight+3*constants.healthHeight+1
     window.minWidth = 0 -- No lower limit for width, to avoid scale locks
     window.minHeight = window.defaultHeight -- Locked height
@@ -109,6 +109,8 @@ function Window:Create(name)
 
     windows[name] = window
 
+    futils:Backup(window)
+    futils:Backup(faux_window)
     futils:LoadPosition(window)
     futils:LoadScale(faux_window)
     futils:LoadPosition(window)

@@ -2,7 +2,7 @@
 
 #### v1.4-beta (2023-11-xx)
 
-- NPC now correctly detected, for Val'kyrs are now known as 'vehicle'
+- NPCs were not correctly detected, for Val'kyrs are now known as 'vehicle'
 - Now detecting all ranks of stun spells and abilites, when applicable
 - Code to detect stuns has been greatly optimized
 - Title bar has gotten its color back
@@ -10,6 +10,7 @@
 - Val'kyr HP bars now have a background to make HP bar stand out more
 - Val'kyr names are now clamped to the extents of their HP bar
 - Track Val'kyr HP at 0-100% in normal mode and 50-100% in heroic mode
+- Window settings can be reset once again, with /silk resetwin
 - Removing records temporarily until they are resolved
 
 #### v1.3-beta (2023-11-07)
