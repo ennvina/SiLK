@@ -1,6 +1,6 @@
 ## SiLK Changelog
 
-#### v1.4-beta (2023-11-xx)
+#### v1.4-beta (2023-11-13)
 
 - NPCs were not correctly detected, for Val'kyrs are now known as 'vehicle'
 - Now detecting all ranks of stun spells and abilites, when applicable
