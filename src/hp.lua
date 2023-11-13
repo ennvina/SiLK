@@ -10,33 +10,19 @@ local hpproto = {}
 
 function hpproto:CreateMainFrame()
     local inset = constants.healthInset
-    local mainframe = CreateFrame("Frame",nil,self,"BackdropTemplate")
+    local mainframe = CreateFrame("Frame", nil, self, "SilkHPTemplate")
     mainframe:SetPoint("BOTTOMLEFT",self,"BOTTOMLEFT",constants.healthHeight*(1+constants.nbstunicons)+inset,0)
     mainframe:SetPoint("TOPRIGHT",self,"TOPRIGHT",-inset,0)
     mainframe:SetBackdrop({
         bgFile = "",
         edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",
-        insets = {left = 2, right = 2, top = 2, bottom = 2},
+        insets = { left = 2, right = 3, top = 2, bottom = 3 },
         edgeSize = 9,
     })
-    mainframe:SetFrameLevel(self:GetFrameLevel()+4)
     self.mainframe = mainframe
-end
 
-function hpproto:CreateHealthBar()
-    local healthbar = CreateFrame("StatusBar", nil, self.mainframe, "SilkStatusBarTemplate")
-    healthbar:SetFrameLevel(self.mainframe:GetFrameLevel()-1)
-    self.healthbar = healthbar
-end
-
-function hpproto:CreatePercent()
-    local inset = 4
-    local percent = self.mainframe:CreateFontString(nil,"OVERLAY")
-    percent:SetFont(GameFontNormal:GetFont(),11)
-    percent:SetPoint("RIGHT",self.mainframe,"RIGHT",-inset,0)
-    percent:SetShadowOffset(1,-1)
-    percent:SetShadowColor(0,0,0)
-    self.percent = percent
+    self.healthbar = self.mainframe.statusBar
+    self.percent = self.mainframe.percentText
 end
 
 function hpproto:CreateNameLabel()
@@ -88,12 +74,6 @@ function hpproto:CreateRaidIcon()
 end
 
 function hpproto:SetHP(health,total)
-    if not self.healthbar then
-        self:CreateHealthBar()
-    end
-    if not self.percent then
-        self:CreatePercent()
-    end
     self.health = health
     self.total = total
     if total > 0 then

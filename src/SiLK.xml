@@ -29,7 +29,7 @@
             <MaxColor r="0" g="0" b="0"/>
           </Gradient>
         </Texture>
-        <FontString name="$parentTitleText" parentKey="label" inherits="GameFontNormalSmall" text="YOLO" justifyH="LEFT" justifyV="TOP">
+        <FontString name="$parentTitleText" parentKey="label" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="TOP">
           <Anchors>
             <Anchor point="LEFT">
               <Offset>
@@ -37,9 +37,6 @@
               </Offset>
             </Anchor>
           </Anchors>
-          <FontHeight>
-            <AbsValue val="20"/>
-          </FontHeight>
           <Color r="1" g="1" b="1"/>
           <Shadow>
             <Offset>
@@ -52,12 +49,53 @@
     </Layers>
   </Frame>
 
-  <StatusBar name="SilkStatusBarTemplate" virtual="true">
-    <Anchors>
-      <Anchor point="BOTTOMLEFT" x="2" y="2"/>
-      <Anchor point="TOPRIGHT" x="-2" y="-2"/>
-    </Anchors>
-    <BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
-    <BarColor r="0" g="0.75" b="0"/>
-  </StatusBar>
+  <Frame name="SilkHPTemplate" virtual="true" inherits="BackdropTemplate">
+    <Layers>
+      <Layer level="OVERLAY">
+        <FontString parentKey="percentText" inherits="GameFontNormal" text="">
+          <Anchors>
+            <Anchor point="RIGHT">
+              <Offset>
+                <AbsDimension x="-4" y="0"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="1" g="1" b="1"/>
+          <Shadow>
+            <Offset>
+              <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <StatusBar name="$parentStatusBar" parentKey="statusBar" defaultValue="0">
+        <Layers>
+          <Layer level="BACKGROUND">
+            <Texture name="$parentBg" parentKey="bg">
+              <Color r="0" g="0" b="0" a="0.5"/>
+            </Texture>
+          </Layer>
+        </Layers>
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" x="2" y="2"/>
+          <Anchor point="TOPRIGHT" x="-2" y="-2"/>
+        </Anchors>
+        <BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+        <BarColor r="0" g="0.75" b="0"/>
+        <Scripts>
+          <OnLoad>
+            self:SetFrameLevel(self:GetParent():GetFrameLevel() - 1)
+          </OnLoad>
+        </Scripts>
+      </StatusBar>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        self:SetFrameLevel(self:GetFrameLevel() + 4)
+      </OnLoad>
+    </Scripts>
+  </Frame>
 </Ui>

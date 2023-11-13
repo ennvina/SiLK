@@ -43,7 +43,7 @@ function Window:Create(name)
     window:SetBackdrop({
         bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
         edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",
-        insets = {left = 2, right = 2, top = 2, bottom = 2},
+        insets = { left = 2, right = 3, top = 2, bottom = 3 },
         edgeSize = 9,
     })
 
