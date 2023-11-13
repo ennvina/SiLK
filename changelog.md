@@ -8,6 +8,7 @@
 - Title bar has gotten its color back
 - Val'kyr HP bars have gotten their color back
 - Val'kyr HP bars now have a background to make HP bar stand out more
+- Val'kyr names are now clamped to the extents of their HP bar
 - Track Val'kyr HP at 0-100% in normal mode and 50-100% in heroic mode
 - Removing records temporarily until they are resolved
 

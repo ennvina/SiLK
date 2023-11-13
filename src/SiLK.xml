@@ -61,7 +61,21 @@
             </Texture>
           </Layer>
           <Layer level="OVERLAY">
-            <FontString parentKey="percentText" inherits="GameFontNormal" text="">
+            <Texture name="$parentRaidIcon" parentKey="raidIcon" file="Interface\TargetingFrame\UI-RaidTargetingIcons">
+              <Anchors>
+                 <Anchor point="BOTTOMLEFT">
+                  <Offset>
+                    <AbsDimension x="3" y="3"/>
+                  </Offset>
+                </Anchor>
+                 <Anchor point="TOPRIGHT" relativePoint="BOTTOMLEFT">
+                  <Offset>
+                    <AbsDimension x="14" y="14"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </Texture>
+            <FontString name="$parentPercentText" parentKey="percentText" inherits="GameFontNormal" text="">
               <Anchors>
                 <Anchor point="RIGHT"/>
               </Anchors>
@@ -73,13 +87,16 @@
                 <Color r="0" g="0" b="0"/>
               </Shadow>
             </FontString>
-            <FontString parentKey="nameText" inherits="GameFontNormalSmall" text="">
+            <FontString name="$parentNameText" parentKey="nameText" inherits="GameFontNormalSmall" text="" justifyH="LEFT">
               <Anchors>
-                <!-- todo: LEFT relative to raidicon, offset +1/+0 -->
-                <!-- todo: RIGHT relative to percent, offset -1/+0 -->
-                 <Anchor point="LEFT">
+                <Anchor point="BOTTOMLEFT" relativeTo="$parentRaidIcon" relativePoint="BOTTOMRIGHT">
                   <Offset>
-                    <AbsDimension x="21" y="0"/>
+                    <AbsDimension x="2" y="0"/>
+                  </Offset>
+                </Anchor>
+                <Anchor point="TOPRIGHT" relativeTo="$parentPercentText" relativePoint="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="-6" y="0"/>
                   </Offset>
                 </Anchor>
               </Anchors>

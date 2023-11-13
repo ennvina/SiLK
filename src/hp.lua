@@ -55,13 +55,7 @@ function hpproto:CreateStunLabel()
 end
 
 function hpproto:CreateRaidIcon()
-    local inset = 1
-    local reduction = 3
-    local raidicon = self.mainframe:CreateTexture(nil,"OVERLAY")
-    raidicon:SetPoint("BOTTOMLEFT",self.mainframe,"BOTTOMLEFT",inset+reduction,reduction)
-    raidicon:SetPoint("TOPRIGHT",self.mainframe,"TOPLEFT",inset+constants.healthHeight-reduction,-reduction)
-    raidicon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcons")
-    self.raidicon = raidicon
+    self.raidicon = self.mainframe.statusBar.raidIcon
 end
 
 function hpproto:SetHP(health,total)
@@ -253,7 +247,7 @@ end
 function Silk.CreateHealthPanels(window)
     window.hp = {}
     for i=1,3 do
-        local hp = CreateFrame("Frame",nil,window.container)
+        local hp = CreateFrame("Frame",window:GetName().."_HP"..i,window.container)
         hp:SetPoint("TOPLEFT",window.container,"TOPLEFT",0,-constants.healthHeight*(i-1))
         hp:SetPoint("BOTTOMRIGHT",window.container,"TOPRIGHT",0,-constants.healthHeight*i)
 
