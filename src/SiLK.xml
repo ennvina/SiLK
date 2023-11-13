@@ -18,6 +18,40 @@
       </OnUpdate>
     </Scripts>
   </Frame>
+
+  <Frame name="SilkTitleBarTemplate" virtual="true">
+    <Layers>
+      <Layer level="ARTWORK">
+        <Texture name="$parentBg" parentKey="BG">
+          <Color r="0.5" g="0.5" b="0.5"/>
+          <Gradient orientation="HORIZONTAL">
+            <MinColor r="0.25" g="0.75" b="1"/>
+            <MaxColor r="0" g="0" b="0"/>
+          </Gradient>
+        </Texture>
+        <FontString name="$parentTitleText" parentKey="label" inherits="GameFontNormalSmall" text="YOLO" justifyH="LEFT" justifyV="TOP">
+          <Anchors>
+            <Anchor point="LEFT">
+              <Offset>
+                <AbsDimension x="5" y="0"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <FontHeight>
+            <AbsValue val="20"/>
+          </FontHeight>
+          <Color r="1" g="1" b="1"/>
+          <Shadow>
+            <Offset>
+              <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+
   <StatusBar name="SilkStatusBarTemplate" virtual="true">
     <Anchors>
       <Anchor point="BOTTOMLEFT" x="2" y="2"/>

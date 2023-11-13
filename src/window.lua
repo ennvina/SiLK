@@ -58,7 +58,7 @@ function Window:Create(name)
     window.faux_window = faux_window
     faux_window.window = window
 
-    local corner = CreateFrame("Button", nil, faux_window)
+    local corner = CreateFrame("Button", nil, faux_window, "PanelResizeButtonTemplate")
     corner:SetFrameLevel(faux_window:GetFrameLevel() + 9)
     corner:EnableMouse(true)
     corner:SetScript("OnMouseDown", handlers.Corner_OnMouseDown)
@@ -66,18 +66,6 @@ function Window:Create(name)
     corner:SetHeight(12)
     corner:SetWidth(12)
     corner:SetPoint("BOTTOMRIGHT")
-    corner.tNormal = corner:CreateTexture(nil,"ARTWORK")
-    corner.tNormal:SetAllPoints(true)
-    corner.tNormal:SetTexture("interface/chatframe/ui-chatim-sizegrabber-up")
-    corner:SetNormalTexture(corner.tNormal)
-    corner.tPushed = corner:CreateTexture(nil,"ARTWORK")
-    corner.tPushed:SetAllPoints(true)
-    corner.tPushed:SetTexture("interface/chatframe/ui-chatim-sizegrabber-down")
-    corner:SetPushedTexture(corner.tPushed)
-    corner.tHLight = corner:CreateTexture(nil,"ARTWORK")
-    corner.tHLight:SetAllPoints(true)
-    corner.tHLight:SetTexture("interface/chatframe/ui-chatim-sizegrabber-highlight")
-    corner:SetHighlightTexture(corner.tHLight)
     Tooltip.AddText(corner,SILK_RESIZE_TOOLTIP)
     corner.window = window
 
@@ -87,25 +75,13 @@ function Window:Create(name)
     border:SetFrameLevel(border:GetFrameLevel()+10)
 
     -- Title Bar
-    local titlebar = CreateFrame("Frame",nil,faux_window)
+    local titlebar = CreateFrame("Frame", nil, faux_window, "SilkTitleBarTemplate")
     titlebar:SetPoint("TOPLEFT",faux_window,"TOPLEFT",constants.titleBarInset,-constants.titleBarInset)
     titlebar:SetPoint("BOTTOMRIGHT",faux_window,"TOPRIGHT",-constants.titleBarInset, -(constants.titleHeight+constants.titleBarInset))
     titlebar.window = window
 
-    local gradient = titlebar:CreateTexture(nil,"ARTWORK")
-    local r,g,b,a = 0.25,0.7,1,1;
-    gradient:SetAllPoints(true)
-    gradient:SetTexture(r,g,b,a)
---    gradient:SetGradient("HORIZONTAL",r,g,b,0,0,0) -- @!!!
-    window.gradient = gradient
-
-    local titletext = titlebar:CreateFontString(nil,"OVERLAY")
-    titletext:SetFont(GameFontNormal:GetFont(),8)
-    titletext:SetPoint("LEFT",titlebar,"LEFT",5,0)
+    local titletext = titlebar.label
     titletext:SetText(name)
-    titletext:SetShadowOffset(1,-1)
-    titletext:SetShadowColor(0,0,0)
-    window.titletext = titletext
 
     local close = CreateFrame("Button", nil, faux_window, "UIPanelCloseButtonNoScripts")
     close:SetFrameLevel(close:GetFrameLevel()+5)
@@ -132,10 +108,6 @@ function Window:Create(name)
 --    for k,v in pairs(prototype) do window[k] = v end
 
     windows[name] = window
-
---    self:RegisterDefaultScale(faux_window)
---    self:RegisterDefaultDimensions(window)
---    self:RegisterDefaultDimensions(faux_window)
 
     futils:LoadPosition(window)
     futils:LoadScale(faux_window)
