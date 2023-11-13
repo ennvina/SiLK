@@ -22,17 +22,8 @@ function hpproto:CreateMainFrame()
     self.mainframe = mainframe
 
     self.healthbar = self.mainframe.statusBar
-    self.percent = self.mainframe.percentText
-end
-
-function hpproto:CreateNameLabel()
-    local inset = -1
-    local namelabel = self.mainframe:CreateFontString(nil,"OVERLAY")
-    namelabel:SetFont(GameFontNormal:GetFont(),7)
-    namelabel:SetPoint("LEFT",self.mainframe,"LEFT",inset+constants.healthHeight,0)
-    namelabel:SetShadowOffset(1,-1)
-    namelabel:SetShadowColor(0,0,0)
-    self.namelabel = namelabel
+    self.namelabel = self.mainframe.statusBar.nameText
+    self.percent = self.mainframe.statusBar.percentText
 end
 
 function hpproto:CreateStunIcon()
@@ -85,9 +76,6 @@ function hpproto:SetHP(health,total)
 end
 
 function hpproto:SetName(name)
-    if not self.namelabel then
-        self:CreateNameLabel()
-    end
     self.namelabel.text = name
     self.namelabel:SetText(name)
 end

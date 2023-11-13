@@ -51,24 +51,6 @@
 
   <Frame name="SilkHPTemplate" virtual="true" inherits="BackdropTemplate">
     <Layers>
-      <Layer level="OVERLAY">
-        <FontString parentKey="percentText" inherits="GameFontNormal" text="">
-          <Anchors>
-            <Anchor point="RIGHT">
-              <Offset>
-                <AbsDimension x="-4" y="0"/>
-              </Offset>
-            </Anchor>
-          </Anchors>
-          <Color r="1" g="1" b="1"/>
-          <Shadow>
-            <Offset>
-              <AbsDimension x="1" y="-1"/>
-            </Offset>
-            <Color r="0" g="0" b="0"/>
-          </Shadow>
-        </FontString>
-      </Layer>
     </Layers>
     <Frames>
       <StatusBar name="$parentStatusBar" parentKey="statusBar" defaultValue="0">
@@ -77,6 +59,38 @@
             <Texture name="$parentBg" parentKey="bg">
               <Color r="0" g="0" b="0" a="0.5"/>
             </Texture>
+          </Layer>
+          <Layer level="OVERLAY">
+            <FontString parentKey="percentText" inherits="GameFontNormal" text="">
+              <Anchors>
+                <Anchor point="RIGHT"/>
+              </Anchors>
+              <Color r="1" g="1" b="1"/>
+              <Shadow>
+                <Offset>
+                  <AbsDimension x="1" y="-1"/>
+                </Offset>
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+            <FontString parentKey="nameText" inherits="GameFontNormalSmall" text="">
+              <Anchors>
+                <!-- todo: LEFT relative to raidicon, offset +1/+0 -->
+                <!-- todo: RIGHT relative to percent, offset -1/+0 -->
+                 <Anchor point="LEFT">
+                  <Offset>
+                    <AbsDimension x="21" y="0"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <Color r="1" g="1" b="1"/>
+              <Shadow>
+                <Offset>
+                  <AbsDimension x="1" y="-1"/>
+                </Offset>
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
           </Layer>
         </Layers>
         <Anchors>
