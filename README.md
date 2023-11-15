@@ -7,7 +7,7 @@ Silent Lich King tracks Val'kyr HP bars and stunlock sequences to analyze dimini
 ## Features
 
 - Val'kyr HP bars, ranging from 0 to 100% in normal mode and 50 to 100% in heroic mode
-- Val'kyrs raid icons (white skull, red cross, etc.)
+- Val'kyr raid icons (white skull, red cross, etc.)
 - Stuns are displayed in the order they were cast
 - Mouseover a stun icon to know who did it, and for how long the stun would last
 - The remaining duration of the latest stun is shown in green

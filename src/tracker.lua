@@ -13,8 +13,17 @@ local tracker = {
 }
 
 function tracker:UnitIsValkyr(guid)
-    local npcid = guid:sub(25,29)
-    return npcid == self.defaultnpcid
+    if guid:sub(1,8) == "Vehicle-" then
+        local npcid = select(6, strsplit("-", guid))
+        return npcid == self.defaultnpcid
+    end
+    --[[ For testing on Training Dummies
+    if guid:sub(1,9) == "Creature-" then
+        local npcid = select(6, strsplit("-", guid))
+        return npcid == "31144" or npcid == "32666" or npcid == "32667"
+    end
+    ]]
+    return false
 end
 
 function tracker:UnitIsTracked(unit)

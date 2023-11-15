@@ -1,5 +1,9 @@
 ## SiLK Changelog
 
+#### v1.5-beta (2023-11-15)
+
+- Val'kyrs were sometimes not listed
+
 #### v1.4-beta (2023-11-13)
 
 - NPCs were not correctly detected, for Val'kyrs are now known as 'vehicle'

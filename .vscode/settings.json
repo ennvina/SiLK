@@ -30,6 +30,7 @@
         "UnitIsUnit",
         "UnitName",
         "SendChatMessage",
-        "SlashCmdList"
+        "SlashCmdList",
+        "strsplit"
     ]
 }
