@@ -1,5 +1,11 @@
 ## SiLK Changelog
 
+#### v1.6-beta (2023-11-16)
+
+- New stun tracked: Warrior's Concussion Blow
+- New stun tracked: Warlock's Intercept, from Felguard
+- Feel free te report missing stuns
+
 #### v1.5-beta (2023-11-15)
 
 - Val'kyrs were sometimes not listed
