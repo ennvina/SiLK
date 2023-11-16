@@ -69,6 +69,10 @@ Silk.Constants = {
 
         [58861] = true,  -- Shaman - Bash (Wolf stun)
 
+        [30153] = true,  -- Warlock - Intercept (Felguard stun) - rank 1
+        [30195] = true,  -- Warlock - Intercept (Felguard stun) - rank 2
+        [30197] = true,  -- Warlock - Intercept (Felguard stun) - rank 3
+        [47995] = true,  -- Warlock - Intercept (Felguard stun) - rank 4
         [30283] = true,  -- Warlock - Shadow fury - rank 1
         [30413] = true,  -- Warlock - Shadow fury - rank 2
         [30414] = true,  -- Warlock - Shadow fury - rank 3
