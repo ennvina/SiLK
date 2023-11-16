@@ -78,6 +78,7 @@ Silk.Constants = {
         [100] = true,    -- Warrior - Charge - rank 1
         [6178] = true,   -- Warrior - Charge - rank 2
         [11578] = true,  -- Warrior - Charge - rank 3
+        [12809] = true,  -- Warrior - Concussion Blow
         [107570] = true, -- Warrior - Storm Bolt
         [46968] = true,  -- Warrior - Shockwave
 
